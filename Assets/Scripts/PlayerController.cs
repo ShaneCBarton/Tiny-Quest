@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool FacingLeft { get { return m_facingLeft; } set { m_facingLeft = value; } }
+
     [SerializeField] float m_moveSpeed = 1f;
 
     private PlayerControls m_playerControls;
     private Vector2 m_movement;
     private Rigidbody2D m_rigidbody;
     private Animator m_myAnimator;
+
+    private bool m_facingLeft = false;
 
     private void Awake()
     {
@@ -26,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         PlayerInput();
+        PlayerFacingDirection();
     }
 
     private void FixedUpdate()
@@ -52,6 +57,25 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 position = m_rigidbody.position + m_movement * (m_moveSpeed * Time.fixedDeltaTime);
         m_rigidbody.MovePosition(position);
+    }
+
+    /// <summary>
+    /// This funciton will check the players facing similar to sword.cs
+    /// Then we will set our FacingLeft property accordingly.
+    /// </summary>
+    private void PlayerFacingDirection()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(transform.position);
+
+        if (mousePos.x < playerScreenPoint.x)
+        {
+            FacingLeft = true;
+        }
+        else
+        {
+            FacingLeft = false;
+        }
     }
 
 }

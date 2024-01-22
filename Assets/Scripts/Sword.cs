@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Sword : MonoBehaviour
+
 {
+    [SerializeField] private GameObject m_slashAnimPrefab;
+    [SerializeField] private Transform m_slashAnimSpawnPoint;
+
     private PlayerControls m_playerControls;
     private Animator m_animator;
     private PlayerController m_playerController;
     private ActiveWeapon m_activeWeapon;
+
+    private GameObject m_slashAnim;
 
     private void Awake()
     {
@@ -28,16 +34,28 @@ public class Sword : MonoBehaviour
     }
 
     /// <summary>
-    /// Activate sword animation
+    /// Activate attack animation and slash effect animation.
     /// </summary>
     private void Attack()
     {
         m_animator.SetTrigger("Attack");
+
+        m_slashAnim = Instantiate(m_slashAnimPrefab, m_slashAnimSpawnPoint.position, Quaternion.identity);
+        m_slashAnim.transform.parent = this.transform.parent;
+        
     }
 
     private void Update()
     {
         MouseFollowWithOffset();
+    }
+
+    /// <summary>
+    /// This function will flip the animation depending on facing direction.
+    /// </summary>
+    public void SwingUpFlipAnim()
+    {
+        m_slashAnim.gameObject.transform.rotation = Quaternion.Euler(-180, 0, 0);
     }
 
     /// <summary>

@@ -34,6 +34,7 @@ public class EnemyAI : MonoBehaviour
         {
             Vector2 roamPosition = GetRoamingPosition();
             m_pathfinding.MoveTo(roamPosition);
+
             yield return new WaitForSeconds(2);
         }
     }

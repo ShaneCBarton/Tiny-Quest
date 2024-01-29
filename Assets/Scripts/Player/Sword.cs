@@ -7,6 +7,7 @@ public class Sword : MonoBehaviour
 {
     [SerializeField] private GameObject m_slashAnimPrefab;
     [SerializeField] private Transform m_slashAnimSpawnPoint;
+    [SerializeField] private Transform m_weaponCollider;
 
     private PlayerControls m_playerControls;
     private Animator m_animator;
@@ -32,6 +33,10 @@ public class Sword : MonoBehaviour
     {
         m_playerControls.Combat.Attack.started += _ => Attack();
     }
+    private void Update()
+    {
+        MouseFollowWithOffset();
+    }
 
     /// <summary>
     /// Activate attack animation and slash effect animation.
@@ -39,21 +44,22 @@ public class Sword : MonoBehaviour
     private void Attack()
     {
         m_animator.SetTrigger("Attack");
+        m_weaponCollider.gameObject.SetActive(true);
 
         m_slashAnim = Instantiate(m_slashAnimPrefab, m_slashAnimSpawnPoint.position, Quaternion.identity);
         m_slashAnim.transform.parent = this.transform.parent;
-        
     }
 
-    private void Update()
+    public void DoneAttackingAnimEvent()
     {
-        MouseFollowWithOffset();
+        m_weaponCollider.gameObject.SetActive(false);
     }
+
 
     /// <summary>
     /// This function will flip the animation depending on facing direction.
     /// </summary>
-    public void SwingUpFlipAnim()
+    public void SwingUpFlipAnimEvent()
     {
         m_slashAnim.gameObject.transform.rotation = Quaternion.Euler(-180, 0, 0);
 
@@ -63,7 +69,11 @@ public class Sword : MonoBehaviour
         }
     }
 
-    public void SwingDownFlipAnim()
+    /// <summary>
+    /// This function is essentially the same as SwingUpFlip but for the
+    /// down swing. Maybe a cleaner way to do this without copying code.
+    /// </summary>
+    public void SwingDownFlipAnimEvent()
     {
         m_slashAnim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
 
@@ -89,10 +99,12 @@ public class Sword : MonoBehaviour
         if (mousePos.x < playerScreenPoint.x)
         {
             m_activeWeapon.transform.rotation = Quaternion.Euler(0, -180, angle);
+            m_weaponCollider.transform.rotation = Quaternion.Euler(0, -180, 0);
         }
         else if (mousePos.x > playerScreenPoint.x)
         {
             m_activeWeapon.transform.rotation = Quaternion.Euler(0, 0, angle);
+            m_weaponCollider.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 }

@@ -96,8 +96,9 @@ GameObject:
   - component: {fileID: 8210197644054030404}
   - component: {fileID: 8141418721388730792}
   - component: {fileID: 6543525305151210061}
-  - component: {fileID: 123018717041762072}
+  - component: {fileID: 2298625275118909111}
   - component: {fileID: 3584015632890692714}
+  - component: {fileID: 3584088900389195674}
   m_Layer: 0
   m_Name: Cyclops
   m_TagString: Untagged
@@ -235,7 +236,7 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0046992437, y: -0.110437766}
   m_Size: {x: 0.91541266, y: 0.7133406}
   m_Direction: 1
---- !u!114 &123018717041762072
+--- !u!114 &2298625275118909111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -260,3 +261,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveSpeed: 2
+--- !u!114 &3584088900389195674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294925978456299340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6731b945c0490404e9e2a3c09ab05acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_startingHealth: 3

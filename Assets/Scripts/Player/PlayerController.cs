@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
     public bool FacingLeft { get { return m_facingLeft; } set { m_facingLeft = value; } }
     public static PlayerController Instance;
 
-    [SerializeField] float m_moveSpeed = 1f;
+    [SerializeField] private float m_moveSpeed = 1f;
+    [SerializeField] private float m_dashSpeed = 5f;
+    [SerializeField] private float m_dashTime = .2f;
 
     private PlayerControls m_playerControls;
     private Vector2 m_movement;
@@ -22,6 +24,11 @@ public class PlayerController : MonoBehaviour
         m_playerControls = new PlayerControls();
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_myAnimator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {   
+        m_playerControls.Combat.Dash.performed += _ => Dash();
     }
 
     private void OnEnable()
@@ -80,4 +87,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This function enables the player to dash. 
+    ///</summary>
+    private void Dash()
+    {
+        m_moveSpeed *= m_dashSpeed;
+        StartCoroutine(EndDashRoutine());
+    }
+
+    /// <summary>
+    /// This function will end the dash after a set amount of time.
+    /// </summary>
+    private IEnumerator EndDashRoutine()
+    {
+        yield return new WaitForSeconds(m_dashTime);
+        m_moveSpeed /= m_dashSpeed;
+    }
 }

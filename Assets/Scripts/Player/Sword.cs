@@ -8,11 +8,14 @@ public class Sword : MonoBehaviour
     [SerializeField] private GameObject m_slashAnimPrefab;
     [SerializeField] private Transform m_slashAnimSpawnPoint;
     [SerializeField] private Transform m_weaponCollider;
+    [SerializeField] private float m_cooldownTime = .5f;
 
     private PlayerControls m_playerControls;
     private Animator m_animator;
     private PlayerController m_playerController;
     private ActiveWeapon m_activeWeapon;
+    private bool m_attackButtonDown = false;
+    private bool m_isAttacking = false;
 
     private GameObject m_slashAnim;
 
@@ -31,23 +34,40 @@ public class Sword : MonoBehaviour
 
     private void Start()
     {
-        m_playerControls.Combat.Attack.started += _ => Attack();
+        m_playerControls.Combat.Attack.started += _ => StartAttacking();
+        m_playerControls.Combat.Attack.canceled += _ => StopAttacking();
     }
     private void Update()
     {
         MouseFollowWithOffset();
+        Attack();
+    }
+
+    private void StartAttacking()
+    {
+        m_attackButtonDown = true;
+    }
+
+    private void StopAttacking()
+    {
+        m_attackButtonDown = false;
     }
 
     /// <summary>
     /// Activate attack animation and slash effect animation.
+    /// Enable collider to detect collision, enable attack cooldown.
     /// </summary>
     private void Attack()
     {
-        m_animator.SetTrigger("Attack");
-        m_weaponCollider.gameObject.SetActive(true);
-
-        m_slashAnim = Instantiate(m_slashAnimPrefab, m_slashAnimSpawnPoint.position, Quaternion.identity);
-        m_slashAnim.transform.parent = this.transform.parent;
+        if (m_attackButtonDown && !m_isAttacking)
+        {
+            m_isAttacking = true;
+            m_animator.SetTrigger("Attack");
+            m_weaponCollider.gameObject.SetActive(true);
+            m_slashAnim = Instantiate(m_slashAnimPrefab, m_slashAnimSpawnPoint.position, Quaternion.identity);
+            m_slashAnim.transform.parent = this.transform.parent;
+            StartCoroutine(AttackCooldownRoutine());
+        }
     }
 
     public void DoneAttackingAnimEvent()
@@ -106,5 +126,14 @@ public class Sword : MonoBehaviour
             m_activeWeapon.transform.rotation = Quaternion.Euler(0, 0, 0);
             m_weaponCollider.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
+    }
+
+    /// <summary>
+    /// Attack cooldown routine to prevent spamming of attacks.
+    /// </summary>
+    private IEnumerator AttackCooldownRoutine()
+    {
+        yield return new WaitForSeconds(m_cooldownTime);
+        m_isAttacking = false;
     }
 }

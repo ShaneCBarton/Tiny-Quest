@@ -40,7 +40,6 @@ public class EnemyHealth : MonoBehaviour
     /// <summary>
     /// This coroutine will detect wether or not this entity has died after resolving the hit flash effect.
     /// </summary>
-    /// <returns></returns>
     private IEnumerator CheckDetectDeathRoutine()
     {
         yield return new WaitForSeconds(m_flash.GetRestoreMaterialTime());

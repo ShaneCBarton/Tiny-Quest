@@ -27,7 +27,6 @@ public class EnemyAI : MonoBehaviour
     /// This coroutine calls a function to generate a new direction and then calls a function
     /// from EnemyPathfinding script to move in that direction. Every 2 seconds.
     /// </summary>
-    /// <returns></returns>
     private IEnumerator RoamingRoutine()
     {
         while (m_state == State.Roaming)

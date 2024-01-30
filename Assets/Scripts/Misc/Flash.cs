@@ -22,7 +22,6 @@ public class Flash : MonoBehaviour
     /// This coroutine will flash a white material on the game object briefly and then return it to default.
     /// Used as visual feedback.
     /// </summary>
-    /// <returns></returns>
     public IEnumerator FlashRoutine()
     {
         m_spriteRenderer.material = m_whiteFlash;

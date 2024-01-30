@@ -31,7 +31,6 @@ public class Knockback : MonoBehaviour
     /// <summary>
     /// This coroutine will ensure that entities are only knocked back briefly and not indefinitely. 
     /// </summary>
-    /// <returns></returns>
     private IEnumerator KnockbackRoutine()
     {
         yield return new WaitForSeconds(m_knockbackTime);

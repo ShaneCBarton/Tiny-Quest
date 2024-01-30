@@ -8,14 +8,21 @@ public class EnemyPathfinding : MonoBehaviour
 
     private Rigidbody2D m_rigidbody;
     private Vector2 m_movementDirection;
+    private Knockback m_knockback;
 
     private void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
+        m_knockback = GetComponent<Knockback>();
     }
 
     private void FixedUpdate()
     {
+        if (m_knockback.m_gettingKnockedBack)
+        {
+            return;
+        }
+
         m_rigidbody.MovePosition(m_rigidbody.position + m_movementDirection * (m_moveSpeed * Time.fixedDeltaTime));
     }
 

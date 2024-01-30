@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int m_startingHealth = 3;
     [SerializeField] private int m_knockbackAmount = 5;
+    [SerializeField] private GameObject m_deathVFXPrefab;
 
     private int m_currentHealth;
     private Knockback m_knocback;
@@ -36,6 +37,10 @@ public class EnemyHealth : MonoBehaviour
         StartCoroutine(CheckDetectDeathRoutine());
     }
 
+    /// <summary>
+    /// This coroutine will detect wether or not this entity has died after resolving the hit flash effect.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator CheckDetectDeathRoutine()
     {
         yield return new WaitForSeconds(m_flash.GetRestoreMaterialTime());
@@ -49,6 +54,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (m_currentHealth <= 0)
         {
+            Instantiate(m_deathVFXPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

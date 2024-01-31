@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SelfDestroy : MonoBehaviour
 { 
-    public void DestroySelf()
+    public void DestroySelfAnimEvent()
     {
         Destroy(gameObject);
     }

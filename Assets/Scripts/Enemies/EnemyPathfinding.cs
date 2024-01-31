@@ -18,7 +18,7 @@ public class EnemyPathfinding : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (m_knockback.m_gettingKnockedBack)
+        if (m_knockback.GettingKnockedBack)
         {
             return;
         }

@@ -12,8 +12,8 @@ public class AreaExit : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PlayerController>())
         {
-            SceneManagement.Instance.SetTransitionName(m_transitionName);
             SceneManager.LoadScene(m_sceneToLoad);
+            SceneManagement.Instance.SetTransitionName(m_transitionName);
         }
     }
     

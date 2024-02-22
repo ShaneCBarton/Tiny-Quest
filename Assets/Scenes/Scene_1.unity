@@ -28194,7 +28194,7 @@ Tilemap:
       - {fileID: -1996586934, guid: 55e1485033a11024c944607c7a20d64c, type: 3}
       - {fileID: 1064288764, guid: 55e1485033a11024c944607c7a20d64c, type: 3}
       - {fileID: -1971917700, guid: 55e1485033a11024c944607c7a20d64c, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -3, y: 10, z: 0}
@@ -28205,7 +28205,7 @@ Tilemap:
       - {fileID: -1996586934, guid: 55e1485033a11024c944607c7a20d64c, type: 3}
       - {fileID: 1064288764, guid: 55e1485033a11024c944607c7a20d64c, type: 3}
       - {fileID: -1971917700, guid: 55e1485033a11024c944607c7a20d64c, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 12, y: 10, z: 0}
@@ -32645,6 +32645,50 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 305290516}
   m_Damping: 0.5
   m_MaxWindowSize: -1
+--- !u!1 &2006015575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2006015576}
+  - component: {fileID: 2006015577}
+  m_Layer: 0
+  m_Name: Camera Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2006015576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006015575}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.921635, y: 1.1194915, z: -0.019267805}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2006015577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006015575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2faeb3983eb35e84ebf8a56b67ef086d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2106317299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32909,3 +32953,4 @@ SceneRoots:
   - {fileID: 788941964}
   - {fileID: 1843113781324154075}
   - {fileID: 79146005}
+  - {fileID: 2006015576}
